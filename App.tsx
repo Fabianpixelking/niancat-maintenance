@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { RetroButton } from './components/RetroButton';
 import { WindowsModal } from './components/WindowsModal';
+import { Starfield } from './components/Starfield';
 import { generateDeveloperExcuse } from './services/geminiService';
 
 const App: React.FC = () => {
@@ -22,29 +23,40 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#003366] text-white font-['VT323'] flex flex-col crt relative selection:bg-[#ff3399] selection:text-white">
+    <div className="min-h-screen bg-[#003366] text-white font-['VT323'] flex flex-col crt relative selection:bg-[#ff3399] selection:text-white overflow-hidden">
+      
+      {/* Animated Background */}
+      <Starfield />
+
+      {/* Scanline Overlay */}
+      <div className="absolute inset-0 z-[5] pointer-events-none">
+          <div className="w-full h-[20px] bg-white opacity-[0.05] animate-scanline"></div>
+      </div>
       
       {/* Top Terminal Bar */}
-      <div className="border-b border-white p-2 flex justify-between text-xl tracking-wider">
+      <div className="border-b border-white p-2 flex justify-between text-xl tracking-wider relative z-10 bg-[#003366]/50 backdrop-blur-[2px]">
         <span>TERMINAL: Fabian_Offline_Variant</span>
         <span>| STATUS: OFFLINE</span>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col items-center justify-center p-4 text-center">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 text-center relative z-10">
         
-        {/* Nyan Cat Logo */}
-        <div className="mb-8">
-          <img 
-            src="https://media1.tenor.com/m/2roX3uxz_68AAAAC/cat-space.gif" 
-            alt="Nyan Cat Space"
-            className="h-32 md:h-48 mx-auto object-contain"
-            style={{ imageRendering: 'pixelated' }}
-          />
+        {/* Nyan Cat Logo - Tenor Embed */}
+        <div className="mb-8 w-48 md:w-64 mx-auto">
+          <div 
+            className="tenor-gif-embed" 
+            data-postid="17461713593828281310" 
+            data-share-method="host" 
+            data-aspect-ratio="2.51515" 
+            data-width="100%"
+          >
+            <a href="https://tenor.com/view/cat-gif-17461713593828281310">Cat Sticker</a>
+          </div>
         </div>
 
-        {/* Status Header */}
-        <h1 className="text-5xl md:text-6xl mb-6 tracking-widest text-white uppercase drop-shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
+        {/* Status Header - Floating Animation */}
+        <h1 className="text-5xl md:text-6xl mb-6 tracking-widest text-white uppercase drop-shadow-[4px_4px_0_rgba(0,0,0,0.5)] animate-float">
           STATUS: <span className="text-[#ff3399]">FABIAN_IS_REFUELING.</span>
         </h1>
 
@@ -69,7 +81,7 @@ const App: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <div className="p-2 text-center text-[#99ccff] text-lg">
+      <div className="p-2 text-center text-[#99ccff] text-lg relative z-10">
         System_Version: v0.99.1-beta // Do not disturb
       </div>
 
